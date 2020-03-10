@@ -1,5 +1,5 @@
 # zeit offline
-[wip] simple zeit.de crawler
+**[wip]** simple zeit.de crawler
 
 ## Requirements (use 'pip install')
 
