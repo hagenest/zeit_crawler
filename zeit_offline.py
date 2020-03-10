@@ -1,5 +1,6 @@
 import feedparser
 import urllib.request, urllib.error, urllib.parse
+from BeautifulSoup import BeautifulSoup 
 
 
 # reads in rss-feed
@@ -12,6 +13,7 @@ saved_links = [line.rstrip('\n') for line in open("saved_links")]
 # iterates over entries in news_feed
 i = 0
 for entries in news_feed.entries:
+    # checks if entry is already in saved_links
     if not news_feed.entries[i]['link'] in saved_links:
 
         # adds url to saved_links file
@@ -22,8 +24,8 @@ for entries in news_feed.entries:
         # saves sites as html file
         url = news_feed.entries[i]['link']
         response = urllib.request.urlopen(url)
-        web_content = response.read()
         f = open(news_feed.entries[i]['title'] + " " + news_feed.entries[i]['published'] + ".html", "wb")
-        f.write(web_content)
+        f.write(response.read())
         f.close
+
     i = i+1
