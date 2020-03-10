@@ -1,5 +1,4 @@
 import feedparser
-import feedparser
 import urllib.request, urllib.error, urllib.parse
 
 
