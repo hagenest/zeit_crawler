@@ -4,11 +4,9 @@
 
 ## Requirements (use 'pip install')
 
-beautifulsoup4
 
 feedparser
 
-records
 
 ## You also need:
 
