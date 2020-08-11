@@ -62,6 +62,7 @@ def print_data():
 def get_saved_links():
 
     conn = sqlite3.connect("zeit.db")
+    conn.row_factory = lambda cursor, row: row[0]
     c = conn.cursor()
 
     c.execute("SELECT url FROM Zeit")

@@ -15,6 +15,7 @@ if not os.path.isfile("zeit.db"):
 
 # gets already saved entries
 saved_links = zeit_database.get_saved_links()
+print(saved_links)
 
 # saves current datetime
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
