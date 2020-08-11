@@ -11,7 +11,7 @@ newsfeed = feedparser.parse("http://newsfeed.zeit.de/all")
 
 # creates a new database if there isn't one already
 if not os.path.isfile("zeit.db"):
-    zeit_database.create_database(is_debug_mode=False)
+    zeit_database.create_database()
 
 # gets already saved entries
 saved_links = zeit_database.get_saved_links()

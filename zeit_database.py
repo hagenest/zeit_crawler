@@ -1,18 +1,11 @@
 import sqlite3
 
-# creates a new Database and table. has an optional debugging mode
-def create_database(is_debug_mode):
+# creates a new Database and table
+def create_database():
 
     # connects cursor to sqlite database
     conn = sqlite3.connect("zeit.db")
     c = conn.cursor()
-
-    # changes the output to dictionaries instead of lists
-    conn.row_factory = sqlite3.Row
-
-    # Drops table in debug mode
-    if is_debug_mode == True:
-        c.execute("DROP TABLE IF EXISTS Zeit")
 
     # creates database table
     c.execute(
@@ -32,21 +25,6 @@ def create_database(is_debug_mode):
     # closes connection to database
     conn.commit()
     conn.close()
-
-    # writes test data and prints it if in debug mode
-    if is_debug_mode == True:
-        testData = (
-            "www.zeit.de/test",
-            "Test-Artikel",
-            "Mr. WasgehtSiedasan",
-            "published time" "2020-08-11 13:37:00",
-            0,
-            "Gesellschaft",
-            "test summary",
-            "Test-Artikel.txt",
-        )
-        insert_data(testData)
-        print_data()
 
 
 # takes in a tupel with data and inserts it into the table
@@ -85,8 +63,6 @@ def get_saved_links():
 
     conn = sqlite3.connect("zeit.db")
     c = conn.cursor()
-
-    conn.row_factory = sqlite3.Row
 
     c.execute("SELECT url FROM Zeit")
     links = c.fetchall()
