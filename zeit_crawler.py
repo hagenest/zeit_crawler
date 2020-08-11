@@ -13,15 +13,15 @@ newsfeed = feedparser.parse("http://newsfeed.zeit.de/all")
 if not os.path.isfile("zeit.db"):
     zeit_database.create_database(is_debug_mode=False)
 
-# gets already safed entries
-safed_links = zeit_database.get_safed_links()
+# gets already saved entries
+saved_links = zeit_database.get_saved_links()
 
 # saves current datetime
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
 # iterates through all entries in the newsfeed and inserts new ones into the database
 for entry in newsfeed.entries:
-    if entry.link not in safed_links:
+    if entry.link not in saved_links:
         zeit_database.insert_data(
             (
                 entry.link,
@@ -37,7 +37,7 @@ for entry in newsfeed.entries:
         )
 
         # saves article as html in the articles folder
-        #response = urllib.request.urlopen(entry.link)
-        #new_file = open("/articles/" + entry.title.replace('.','') + ".html", "wb")
-        #new_file.write(response.read())
-        #new_file.close()
+        # response = urllib.request.urlopen(entry.link)
+        # new_file = open("/articles/" + entry.title.replace('.','') + ".html", "wb")
+        # new_file.write(response.read())
+        # new_file.close()

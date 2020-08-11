@@ -17,7 +17,7 @@ def create_database(is_debug_mode):
     # creates database table
     c.execute(
         """CREATE TABLE Zeit(
-                url TEXT,
+                url TEXT PRIMARY KEY,
                 title TEXT,
                 author TEXT,
                 scraped TEXT,
@@ -81,7 +81,7 @@ def print_data():
     conn.close()
 
 
-def get_safed_links():
+def get_saved_links():
 
     conn = sqlite3.connect("zeit.db")
     c = conn.cursor()
