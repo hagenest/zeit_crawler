@@ -1,4 +1,4 @@
-# zeit offline
+# news crawler
 
 **[wip]** simple zeit.de crawler
 
