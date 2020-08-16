@@ -1,12 +1,12 @@
-# news crawler
+# leitmedien
 
-**[wip]** simple zeit.de crawler
+**[wip]** a crawler for major german news sites.
+hopefully with data analysis in the future
 
 ## Requirements (use 'pip install')
 
-
-feedparser
-
+- feedparser
+- BeautifulSoup4
 
 ## You also need:
 
