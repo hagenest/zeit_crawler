@@ -12,7 +12,7 @@ newspapers = [
     ["https://www.nzz.ch/recent.rss", "nzz"],
     ["https://www.fr.de/rssfeed.rdf", "fr"],
     ["https://www.neues-deutschland.de/rss/aktuell.php", "nd"],
-    ["https://rss.sueddeutsche.de/app/service/rss/alles/index.rss?output=rss", "sz"]
+    ["https://rss.sueddeutsche.de/app/service/rss/alles/index.rss?output=rss", "sz"],
 ]
 
 
