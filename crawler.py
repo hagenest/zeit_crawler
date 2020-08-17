@@ -6,7 +6,7 @@ import urllib
 import bs4 as bs
 import urllib.request
 import database
-
+import requests
 
 class NewsCrawler:
     def __init__(self, name, url):
@@ -26,9 +26,6 @@ class NewsCrawler:
         # iterates through all entries in the newsfeed and inserts new ones into the database
         for entry in feed.entries:
             if entry.link not in saved_urls:
-
-                # source = urllib.request.urlopen(entry.link).read()
-                # soup = bs.BeautifulSoup(source, "lxml")
 
                 if self.name == "zeit":
                     # formats summary
@@ -51,12 +48,15 @@ class NewsCrawler:
                     )
 
                 if self.name == "spiegel":
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find("meta", "author")
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             entry.category, #category
@@ -65,12 +65,15 @@ class NewsCrawler:
                     )
 
                 if self.name == "welt":
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find(name ="author")
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             entry.category, #category
@@ -98,12 +101,15 @@ class NewsCrawler:
                     )
 
                 if self.name == "nzz":
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find(name ="author")
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             "NULL", #category
@@ -112,12 +118,15 @@ class NewsCrawler:
                     )
 
                 if self.name == "fr":
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find(name ="author")
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             "NULL", #category
@@ -126,12 +135,15 @@ class NewsCrawler:
                     )
 
                 if self.name == "nd":
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find(name ="author")
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             entry.category, #category
@@ -141,15 +153,19 @@ class NewsCrawler:
 
                 if self.name == "sz":
 
-                    soup = bs.BeautifulSoup(entry.summary, "lxml")
-                    summary = soup.get_text()
+                    soups = bs.BeautifulSoup(entry.summary, "lxml")
+                    summary = soups.get_text()
+
+                    req = requests.get(entry.link)
+                    soup = bs.BeautifulSoup(req.text, "html.parser")
+                    author = soup.find(name ="author")
 
                     database.insert_data(
                         (
                             entry.link, #url
                             entry.title, #title
                             self.name, #newspaper
-                            "NULL", #author
+                            author, #author
                             now, #scraped
                             "NULL", #isPremium
                             entry.category, #category
