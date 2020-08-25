@@ -1,4 +1,5 @@
-# gets already saved entries
+# crawls through news sites via their rss-feeds
+
 import feedparser
 import datetime
 import time
@@ -16,6 +17,7 @@ class NewsCrawler:
 
     def crawl_feed(self):
 
+        # parses rss-feed through feedparser library
         feed = feedparser.parse(self.url)
 
         # gets already saved entries
@@ -23,11 +25,12 @@ class NewsCrawler:
 
         # saves current datetime in ISO8601 string format
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-        # print(feed.entries)
+
         # iterates through all entries in the newsfeed and inserts new ones into the database
         for entry in feed.entries:
             if entry.link not in saved_urls:
 
+                # checks for each sites' specific quirks; I'd love a less ugly solution
                 if self.name == "zeit":
                     # formats summary
                     if "</a>" in entry.summary:
@@ -173,3 +176,10 @@ class NewsCrawler:
                             summary,  # summary
                         )
                     )
+
+    # uses bs4 to get specific info out of html page
+    # failcase if the information isn't available in the rss-feed
+    def get_bs(self, term):
+        req = requests.get(self.link)
+        soup = bs.BeautifulSoup(req.text, "html.parser")
+        return soup.find(name=term)

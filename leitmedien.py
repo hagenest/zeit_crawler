@@ -1,3 +1,5 @@
+# main script, which calls all other packages
+
 import crawler
 import database
 import os.path

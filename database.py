@@ -1,3 +1,5 @@
+# creates and manages sqlite3 database
+
 import sqlite3
 
 # creates a new table (and database if needed)
