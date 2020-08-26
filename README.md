@@ -6,7 +6,7 @@ hopefully with data analysis in the future
 ## Requirements (use 'pip install')
 
 - feedparser
-- BeautifulSoup4
+- beautifulSoup4
 
 ## You also need:
 
