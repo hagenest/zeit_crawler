@@ -1,7 +1,7 @@
 # main script, which calls all other packages
 
 import crawler
-import database
+import database as db
 import os.path
 
 
@@ -18,11 +18,15 @@ newspapers = [
 ]
 
 
-# creates a new database if there isn't one already
-if not os.path.isfile("leitmedien.db"):
-    database.create_table()
+def main():
+    # creates a new db if there isn't one already
+    if not os.path.isfile("leitmedien.db"):
+        db.create_table()
+
+    for entry in newspapers:
+        news_crawler = crawler.NewsCrawler(name=entry[1], url=entry[0])
+        news_crawler.crawl_feed()
 
 
-for entry in newspapers:
-    news_crawler = crawler.NewsCrawler(name=entry[1], url=entry[0])
-    news_crawler.crawl_feed()
+if __name__ == "__main__":
+    main()

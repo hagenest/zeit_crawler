@@ -6,7 +6,7 @@ import time
 import urllib
 import bs4 as bs
 import urllib.request
-import database
+import database as db
 import requests
 
 
@@ -20,13 +20,15 @@ class NewsCrawler:
         # parses rss-feed through feedparser library
         feed = feedparser.parse(self.url)
 
-        # gets already saved entries
-        saved_urls = database.get_saved_links(self.name)
+        print(feed)
 
-        # saves current datetime in ISO8601 string format
+        # gets already saved entries
+        saved_urls = db.get_saved_links(self.name)
+
+        # saves current datetime in shortened ISO8601 string format
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
-        # iterates through all entries in the newsfeed and inserts new ones into the database
+        # iterates through all entries in the newsfeed and inserts new ones into the db
         for entry in feed.entries:
             if entry.link not in saved_urls:
 
@@ -38,7 +40,7 @@ class NewsCrawler:
                     else:
                         summary = entry.summary
 
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -55,7 +57,7 @@ class NewsCrawler:
                     req = requests.get(entry.link)
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find("meta", "author")
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -72,7 +74,7 @@ class NewsCrawler:
                     req = requests.get(entry.link)
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find(name="author")
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -91,7 +93,7 @@ class NewsCrawler:
                         a, summary = str(entry.summary).split("</a>", 1)
                     else:
                         summary = entry.summary
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -108,7 +110,7 @@ class NewsCrawler:
                     req = requests.get(entry.link)
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find(name="author")
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -125,7 +127,7 @@ class NewsCrawler:
                     req = requests.get(entry.link)
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find(name="author")
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -142,7 +144,7 @@ class NewsCrawler:
                     req = requests.get(entry.link)
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find(name="author")
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
@@ -164,7 +166,7 @@ class NewsCrawler:
                     soup = bs.BeautifulSoup(req.text, "html.parser")
                     author = soup.find(name="author")
 
-                    database.insert_data(
+                    db.insert_data(
                         (
                             entry.link,  # url
                             entry.title,  # title
