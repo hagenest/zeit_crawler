@@ -20,8 +20,6 @@ class NewsCrawler:
         # parses rss-feed through feedparser library
         feed = feedparser.parse(self.url)
 
-        print(feed)
-
         # gets already saved entries
         saved_urls = db.get_saved_links(self.name)
 
