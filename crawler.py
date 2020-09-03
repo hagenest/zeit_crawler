@@ -30,6 +30,8 @@ class NewsCrawler:
         for entry in feed.entries:
             if entry.link not in saved_urls:
 
+                log(now, entry.title)
+
                 # checks for each sites' specific quirks; I'd love a less ugly solution
                 if self.name == "zeit":
                     # formats summary
@@ -183,3 +185,9 @@ class NewsCrawler:
         req = requests.get(self.link)
         soup = bs.BeautifulSoup(req.text, "html.parser")
         return soup.find(name=term)
+
+
+def log(i1, i2):
+    f = open("log.txt", "a")
+    f.write(i1 + "; " + i2 + "\n")
+    f.close()
