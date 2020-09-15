@@ -39,6 +39,7 @@ class Crawler:
 
     def get_authors(self, soup):
         authors = soup.find(name="author")
+        return authors.split(", ")
 
     def insert_data(
         self, url  # , title, site, date, isPremium, summary, keywords, authors
@@ -52,9 +53,9 @@ class Crawler:
             summary=self.get_summary(soup),
         ).save()
         for keyword in self.get_keywords:
-            db.Keyword(url = url, keyword=keyword).save()
+            db.Keyword(url = url, keyword=self.get_keywords(soup)).save()
         for author in self.get_authors:
-            db.Author(url = url, author=author).save()
+            db.Author(url = url, author=self.get_authors(soup)).save()
 
 
 class Zeit(Crawler):

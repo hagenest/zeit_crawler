@@ -6,6 +6,7 @@ db = SqliteDatabase("leitmedien.db", pragmas={"foreign_keys": 1})
 
 class BaseModel(Model):
     class Meta:
+        db = SqliteDatabase("leitmedien.db", pragmas={"foreign_keys": 1})
         database = db
 
 
