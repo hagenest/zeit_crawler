@@ -1,12 +1,12 @@
 from peewee import *
 import datetime
 
+
 db = SqliteDatabase("leitmedien.db", pragmas={"foreign_keys": 1})
 
 
 class BaseModel(Model):
     class Meta:
-        db = SqliteDatabase("leitmedien.db", pragmas={"foreign_keys": 1})
         database = db
 
 
@@ -22,12 +22,13 @@ class Article(BaseModel):
 
 class Keyword(BaseModel):
     article = ForeignKeyField(Article, backref="keywords")
-    keyword = TextField()
+    ykeyword = TextField()
 
 
 class Author(BaseModel):
     article = ForeignKeyField(Article, backref="authors")
     author = TextField()
 
+
 db.connect()
-db.create_tables(["Article", "Keyword", "Author"])
+db.create_tables([Article, Keyword, Author])

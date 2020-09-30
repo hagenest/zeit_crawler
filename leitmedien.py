@@ -3,12 +3,15 @@ import crawler
 import os
 
 
-def main():
-    db.db.create_tables(["Article", "Keyword", "Author"])
-    zeit = crawler.Zeit("http://newsfeed.zeit.de/all", "Die Zeit")
-    for entry in zeit.feed.entries:
-        zeit.insert_data(entry.link)
+def crawl(crawler):
+    for entry in crawler.feed.entries:
+        print(entry.link)
+        crawler.insert_data(entry.link)
 
+
+def main():
+    zeitCrawler = crawler.Zeit("http://newsfeed.zeit.de/all", "Zeit Online")
+    crawl(zeitCrawler)
 
 
 if __name__ == "__main__":
