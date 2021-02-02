@@ -1,13 +1,16 @@
 # leitmedien
 
-**[wip]** a crawler for major german news sites.
-hopefully with data analysis in the future
+leitmedien saves metadata from rss-feeds of major German news sites. The goal is to perform data analysis in the future. It is currently heavy **wip**, you probably shouldn't use it.
 
-## Requirements (use 'pip install')
+## Dependencies
+
+- python3 (duh)
+
+It is recommended to install python dependencies into a virtual environment, preferably through pipenv.
 
 - feedparser
 - beautifulSoup4
 
-## You also need:
+## Container / Server setup
 
-python3 (duh)
+Will be added soon-ish, after it doesn't crash anymore.
