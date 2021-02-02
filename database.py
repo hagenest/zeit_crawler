@@ -1,61 +1,34 @@
-# creates and manages sqlite3 database
-
-import sqlite3
-
-# creates a new table (and database if needed)
-def create_table():
-
-    # connects cursor to sqlite database
-    conn = sqlite3.connect("leitmedien.db")
-    c = conn.cursor()
-
-    # creates database table
-    c.execute(
-        """CREATE TABLE News(
-                url TEXT PRIMARY KEY,
-                title TEXT,
-                newspaper TEXT,
-                author TEXT,
-                scraped TEXT,
-                isPremium INT,
-                category TEXT,
-                summary TEXT
-                )"""
-    )
-
-    # closes connection to database
-    conn.commit()
-    conn.close()
+from peewee import *
+import datetime
 
 
-# takes in a tupel with data and inserts it into the table
-# remember to enter it in the correct order!
-def insert_data(data):
-
-    conn = sqlite3.connect("leitmedien.db")
-    c = conn.cursor()
-
-    c.execute(
-        """INSERT INTO News(
-                url, title, newspaper, author, scraped, isPremium, category, summary)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)""",
-        data,
-    )
-
-    conn.commit()
-    conn.close()
+db = SqliteDatabase("leitmedien.db", pragmas={"foreign_keys": 1})
 
 
-# gets saved links for specified newspaper
-def get_saved_links(newspaper):
+class BaseModel(Model):
+    class Meta:
+        database = db
 
-    conn = sqlite3.connect("leitmedien.db")
-    conn.row_factory = lambda cursor, row: row[0]
-    c = conn.cursor()
 
-    c.execute("SELECT url FROM News WHERE newspaper IS ?", (newspaper,))
-    links = c.fetchall()
+class Article(BaseModel):
 
-    conn.close()
+    url = TextField(primary_key=True)
+    title = TextField()
+    site = TextField()
+    date = DateField(default=datetime.datetime.now)
+    isPremium = BooleanField()
+    summary = TextField()
 
-    return links
+
+class Keyword(BaseModel):
+    article = ForeignKeyField(Article, backref="keywords")
+    ykeyword = TextField()
+
+
+class Author(BaseModel):
+    article = ForeignKeyField(Article, backref="authors")
+    author = TextField()
+
+
+db.connect()
+db.create_tables([Article, Keyword, Author])

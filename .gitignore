@@ -132,3 +132,4 @@ dmypy.json
 *.html
 *.db
 log.txt
+test.py
