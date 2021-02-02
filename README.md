@@ -13,4 +13,4 @@ It is recommended to install python dependencies into a virtual environment, pre
 
 ## Container / Server setup
 
-Will be added soon-ish, after it doesn't crash anymore.
+Will be added soon-ish, if it doesn't crash anymore.
