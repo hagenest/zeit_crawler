@@ -1,3 +1,4 @@
 feedparser
 BeautifulSoup4
 peewee
+requests
