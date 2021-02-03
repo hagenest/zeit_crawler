@@ -1,6 +1,6 @@
 # leitmedien
 
-leitmedien saves metadata from rss-feeds of major German news sites. The goal is to perform data analysis in the future. It is currently heavy **wip**, you probably shouldn't use it.
+leitmedien saves metadata from rss-feeds of major German news sites. The goal is to perform data analysis in the future. It is currently heavy **wip**, you shouldn't use it.
 
 ## Dependencies
 
