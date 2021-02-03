@@ -6,10 +6,13 @@ leitmedien saves metadata from rss-feeds of major German news sites. The goal is
 
 - python3 (duh)
 
-It is recommended to install python dependencies into a virtual environment, preferably through virtualenv. Conda will most likely work too.
+It is recommended to install python libraries into a virtual environment, preferably through virtualenv. Conda will most work too.
 
 - feedparser
-- beautifulSoup4
+- beautifulsoup4
+- peewee
+- requests
+- lxml
 
 ## Container / Server setup
 
