@@ -5,6 +5,7 @@ leitmedien saves metadata from rss-feeds of major German news sites. The goal is
 ## Dependencies
 
 - python3 (duh)
+- sqlite3
 
 It is recommended to install python libraries into a virtual environment, preferably through virtualenv. Conda will work too.
 
