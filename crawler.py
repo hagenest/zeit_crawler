@@ -31,7 +31,6 @@ class Crawler:
         return soup.find(name="description")
 
     def get_keywords(self, soup):
-        keyword_list = []
         keywords = soup.find(name="keywords")
         print(keywords)
         return keywords.split(", ")
