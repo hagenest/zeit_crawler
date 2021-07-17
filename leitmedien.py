@@ -1,6 +1,5 @@
 import database as db
 import crawler
-import os
 
 
 def crawl(crawler):
