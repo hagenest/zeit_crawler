@@ -133,3 +133,4 @@ dmypy.json
 *.db
 log.txt
 test.py
+.vscode/settings.json
